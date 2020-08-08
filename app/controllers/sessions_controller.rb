@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user #log_in method is from SessionHelper through ApplicationController
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -13,8 +14,9 @@ class SessionsController < ApplicationController
     end
   end
 
+
   def destroy
-    log_out #log_out method is from SessionHelper through ApplicationController
+    log_out if logged_in? #log_out method is from SessionHelper through ApplicationController
     redirect_to root_url
   end
 end
