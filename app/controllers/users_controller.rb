@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user #log_in method is from SessionHelper through ApplicationController
       flash[:success] = "Welcome tothe Sample App"
       redirect_to @user
     else 
