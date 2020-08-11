@@ -32,8 +32,21 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
+  # config/environments/production.rb copied
+
   config.action_mailer.raise_delivery_errors = false
-  host = 'localhost:3000'
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "michaelhartlsampleapp@gmail.com",
+    :password             => "xjtgyrtiuolshehp",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+  host = 'https://michael-hartl-sample-app.herokuapp.com/'
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
   config.action_mailer.perform_caching = false
