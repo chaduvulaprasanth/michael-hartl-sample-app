@@ -46,7 +46,7 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
-  host = 'https://michael-hartl-sample-app.herokuapp.com/'
+  host = 'localhost:3000'
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
   config.action_mailer.perform_caching = false
